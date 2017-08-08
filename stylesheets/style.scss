@@ -1,0 +1,142 @@
+/* includes / variables / globals */
+$primary-light: #eee;
+$primary-dark: #333;
+
+@font-face {
+	font-family: "Track";
+	src: url("fonts/track/Track.ttf") format("truetype"),
+		 url("fonts/track/track.otf") format("opentype"),
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Track', sans-serif;
+  background: $primary-light;
+}
+
+.overlay--menu {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #9c8b85;
+  transition: 0.2s;
+  opacity: 0;
+  z-index: -1;
+
+  .menu-option {
+    cursor: pointer;
+    transform: translateY(15px);
+    opacity: 0;
+    transition: 0.6s;
+  }
+
+  @for $i from 1 to 4 {
+    .menu-option:nth-child(#{$i}) { transition-delay: $i * 0.1s }
+  }
+}
+
+.show--overlay {
+  opacity: 1;
+  z-index: 0;
+
+  .menu-option {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.outer--container {
+  width: 100vw;
+  background: $primary-light;
+}
+
+.header--container {
+  margin: 0 auto;
+  width: calc(100vw - 60px);
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $primary-dark;
+
+  #short {
+    display: none;
+  }
+}
+
+.outer--nav {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  background: $primary-light;
+
+	&:hover {
+		.bar-1 {
+			transform: translateY(-2px);
+		}
+		.bar-3 {
+			transform: translateY(2px);
+		}
+	}
+
+  .inner--nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bar {
+    height: 2px;
+    width: 22px;
+    background: $primary-dark;
+    transition: 0.3s;
+    pointer-events: none;
+  }
+  .bar-2, .bar-3 {
+    margin: 5px 0 0 0;
+  }
+  .bar-active .bar-1 {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .bar-active .bar-2 {
+    width: 0;
+  }
+  .bar-active .bar-3 {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
+
+.inner--container {
+  margin: 0 auto;
+  width: calc(100vw - 60px);
+  height: 800px;
+  background: $primary-dark;
+}
+
+.footer--container {
+  margin: 0 auto;
+  width: calc(100vw - 60px);
+  height: 60px;
+}
+
+@media screen and (max-width: 450px){
+  .header--container {
+    #full {
+      display: none;
+    }
+    #short {
+      display: block;
+    }
+  }
+}
